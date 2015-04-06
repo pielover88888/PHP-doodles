@@ -1,3 +1,6 @@
+<head>
+<meta name=viewport content="width=device-width, initial-scale=1">
+</head>
 <!--script>
 function edit(name,desc)
 {
@@ -60,11 +63,15 @@ $beg = "<a href=\"";
 $end = "\">";
 foreach($scan_results as $result){
 $content = file_get_contents($result);
+
+//$jscontent = str_replace("\r\n",'\n',$content);
 $jscontent = str_replace("\n",'\n',$content);
-$magic_js = "var naw=document.getElementById('new'); naw.value='$result'; var dask=document.getElementById('desc'); dask.value='$jscontent';dask.style.width='90%';dask.style.height='30%'";
-$delbut = "<button onclick=\"$magic_js\" value='edit'>edit</button><form style='display:inline;float:right;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'> <input style='border-radius:5000px;background-color:red;border-color:rgba(0,0,0,0.0);margin-left:10px;margin-top:-1px;' type='submit' value='x' title='Permanently delete $result'></form>";
+$jscontent = str_replace("\r\n",'\n',$content);
+
+$magic_js = "window.scrollTo(0,0);var naw=document.getElementById('new'); naw.value='$result'; var dask=document.getElementById('desc'); dask.value='$jscontent';dask.style.width='90%';dask.style.height='30%';dask.focus();";
+$delbut = "<button onclick=\"$magic_js\" value='edit' style='margin-left:10%;'>edit</button><form style='display:inline;float:right;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'> <input style='border-radius:5000px;background-color:red;border-color:rgba(0,0,0,0.0);margin-left:10px;margin-top:-1px;' type='submit' value='x' title='Permanently delete $result'></form>";
 		echo "<span style='background-color:rgba(0,0,0,0.05);'>" . $beg . $result . $end . $result . "</a>" . $delbut;
-		echo "<pre style='margin-top:0px;background-color:rgba(0,0,0,0.05);'><code>" . $content . "</code></pre></span>";
+		echo "<pre style='white-space: pre-wrap;margin-top:0px;background-color:rgba(0,0,0,0.05);'><code>" . $content . "</code></pre></span>";
 }
 ?>
 <form action="/todo/index.php" method="POST">
