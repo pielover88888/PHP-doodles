@@ -55,12 +55,12 @@ $beg = "<a href=\"";
 $end = "\">";
 
 foreach($scan_results as $result){
-$delbut = "<form style='display:inline;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'><input type='submit' value='x'></form>";
+$delbut = "<form style='display:inline;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'> <input style='border-radius:5000px;background-color:red;border-color:rgba(0,0,0,0.0);margin-left:10px;margin-top:-1px;' type='submit' value='x' title='Permanently delete $result'></form>";
 		echo "<span style='background-color:rgba(0,0,0,0.05);'>" . $beg . $result . $end . $result . "</a>" . $delbut;
 		echo "<pre style='margin-top:0px;background-color:rgba(0,0,0,0.05);'><code>" . file_get_contents($result) . "</code></pre></span>";
 }
 ?>
 <form action="/todo/index.php" method="POST">
 <input type="text" placeholder="Name" name="del-todo">
-<input type="submit" value="del todo">
+<input type="submit" value="Permanently delete">
 </form>
