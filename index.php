@@ -8,7 +8,7 @@ return true;
 <form action="/todo/index.php" method="POST">
 <input type="text" placeholder="Name" name="new-todo" id='new'><br>
 <textarea type="text" placeholder="desc" id='desc' name="desc"></textarea><br>
-<input type="submit" value="add new todo">
+<input type="submit" value="add new todo" id='datbutton'>
 </form>
 
 <?php
@@ -70,7 +70,7 @@ $end = "\">";
 foreach($scan_results as $result){
 $content = file_get_contents($result);
 $jscontent = str_replace("\n",'\n',$content);
-$magic_js = "var naw=document.getElementById('new'); naw.value='$result'; var dask=document.getElementById('desc'); dask.value='$jscontent';dask.style.width='90%';dask.style.height='30%'";
+$magic_js = "var datbut=document.getElementById('datbutton');datbut.value='add/edit todo';var naw=document.getElementById('new'); naw.value='$result'; var dask=document.getElementById('desc'); dask.value='$jscontent';dask.style.width='90%';dask.style.height='30%'";
 
 $delbut = "<button onclick=\"$magic_js\" value='edit'>edit</button><form style='display:inline;float:right;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'> <input style='border-radius:5000px;background-color:red;border-color:rgba(0,0,0,0.0);margin-left:10px;margin-top:-1px;' type='submit' value='x' title='Permanently delete $result'></form>";
 		echo "<span style='background-color:rgba(0,0,0,0.05);'>" . $beg . $result . $end . $result . "</a>" . $delbut;
