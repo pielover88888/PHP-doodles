@@ -1,17 +1,23 @@
 <form action="/todo/index.php" method="POST">
-<input type="text" placeholder="Name" name="new-todo">
-<input type="text" placeholder="desc" name="desc">
+<input type="text" placeholder="Name" name="new-todo"><br>
+<textarea type="text" placeholder="desc" name="desc"></textarea><br>
 <input type="submit" value="add new todo">
 </form>
 
 <?php
 $didnothing = "no";
 if(isset($_POST["new-todo"])){
-$myfile = fopen($_POST["new-todo"], "w") or die("Unable to open file!");
-$txt = $_POST["desc"];
-fwrite($myfile, $txt);
-fclose($myfile);
-echo "Made new file! check top of list!<br>";
+$neww = $_POST["new-todo"];
+if($neww != "index.php" && $neww != ".git"){
+ $myfile = fopen(htmlspecialchars($_POST["new-todo"]), "w") or die("Unable to open file!");
+ $txt = htmlspecialchars($_POST["desc"]);
+ fwrite($myfile, $txt);
+ fclose($myfile);
+ echo "Made new file! check top of list!<br>";
+} else {
+echo "..really?<br>";
+}
+
 } else {
 if(isset($_POST["del-todo"])){
 echo "Deleted \"". $_POST["del-todo"] . "\"<br>";
@@ -36,7 +42,7 @@ $del = $_POST["del-todo"];
 ?>
 <?php
 function scan_dir($dir) {
-    $ignored = array('.', '..', '.svn', '.htaccess','index.php','.git');
+    $ignored = array('.', '..', '.svn', '.htaccess','index.php','.git','php_errors.log');
 
     $files = array();
     foreach (scandir($dir) as $file) {
