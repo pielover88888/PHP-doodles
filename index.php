@@ -27,12 +27,16 @@ $del = $_POST["del-todo"];
 	if($del != "index.php"){
 	unlink($del);
 	}
+	if($del != ".git"){ // I know, I know. I can do this better.
+	unlink($del);
+	}
+
 }
 
 ?>
 <?php
 function scan_dir($dir) {
-    $ignored = array('.', '..', '.svn', '.htaccess');
+    $ignored = array('.', '..', '.svn', '.htaccess','index.php','.git');
 
     $files = array();
     foreach (scandir($dir) as $file) {
@@ -52,10 +56,8 @@ $end = "\">";
 
 foreach($scan_results as $result){
 $delbut = "<form style='display:inline;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'><input type='submit' value='x'></form>";
-	if($result != "index.php"){
 		echo "<span style='background-color:rgba(0,0,0,0.05);'>" . $beg . $result . $end . $result . "</a>" . $delbut;
 		echo "<pre style='margin-top:0px;background-color:rgba(0,0,0,0.05);'><code>" . file_get_contents($result) . "</code></pre></span>";
-	}
 }
 ?>
 <form action="/todo/index.php" method="POST">
