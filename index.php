@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <head>
 <style>
+//ie 10/11 make tablet scale proper, assume none use ie10/11 on desktop
+@media screen and (min-width:0\0){
+html{
+font-size:100%;
+}
+}
+html{
+margin-top:-8px;
+margin-left:-8px;
+margin-right:-4px;
+}
 .button{
 border-radius:2px;
 }
 #dele,input,select,textarea,button{
+margin-top:4px;
+margin-left:3px;
+border-radius:2px;
+border:1px dashed;
+}
+body{
+padding-left:5px;
 border-radius:2px;
 border:1px dashed;
 }
