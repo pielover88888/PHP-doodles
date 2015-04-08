@@ -1,4 +1,17 @@
+<!DOCTYPE html>
 <head>
+<style>
+.button{
+border-radius:50px;
+}
+input:focus,
+select:focus,
+//textarea:focus,
+button:focus {
+    outline-width: thin;
+	outline-style:outset;
+}
+</style>
 <meta name=viewport content="width=device-width, initial-scale=1">
 </head>
 <!--script>
@@ -10,8 +23,8 @@ return true;
 </script-->
 <form action="/todo/index.php" method="POST">
 <input type="text" placeholder="Name" name="new-todo" id='new'><br>
-<textarea type="text" placeholder="desc" id='desc' name="desc"></textarea><br>
-<input type="submit" value="add new todo">
+<textarea type="text" placeholder="desc" id="desc" name="desc"></textarea><br>
+<input type="submit" class="button" value="Submit">
 </form>
 
 <?php
@@ -68,7 +81,7 @@ $content = file_get_contents($result);
 $jscontent = str_replace("\n",'\n',$content);
 $jscontent = str_replace("\r\n",'\n',$content);
 
-$magic_js = "window.scrollTo(0,0);var naw=document.getElementById('new'); naw.value='$result'; var dask=document.getElementById('desc'); dask.value='$jscontent';dask.style.width='90%';dask.style.height='30%';dask.focus();";
+$magic_js = "window.scrollTo(0,0);var naw=document.getElementById('new'); naw.value='$result';var dask=document.getElementById('desc'); dask.value='$jscontent';dask.style.width='90%';dask.style.height='200px';dask.focus();";
 $delbut = "<button onclick=\"$magic_js\" value='edit' style='margin-left:10%;'>edit</button><form style='display:inline;float:right;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'> <input style='border-radius:5000px;background-color:red;border-color:rgba(0,0,0,0.0);margin-left:10px;margin-top:-1px;' type='submit' value='x' title='Permanently delete $result'></form>";
 		echo "<span style='background-color:rgba(0,0,0,0.05);'>" . $beg . $result . $end . $result . "</a>" . $delbut;
 		echo "<pre style='white-space: pre-wrap;margin-top:0px;background-color:rgba(0,0,0,0.05);'><code>" . $content . "</code></pre></span>";
