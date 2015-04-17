@@ -104,7 +104,7 @@ $jscontent = str_replace("\n",'\n',$content);
 $jscontent = str_replace("\r\n",'\n',$content);
 
 $magic_js = "window.scrollTo(0,0);var naw=document.getElementById('new'); naw.value='$result';var dask=document.getElementById('desc'); dask.value='$jscontent';dask.style.width='90%';dask.style.height='200px';dask.focus();";
-$delbut = "<button onclick=\"$magic_js\" value='edit' style='margin-left:10%;'>edit</button><form style='display:inline;float:right;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'> <input class='dele' style='background-color:red;margin-left:10px;margin-top:-1px;' type='submit' value='x' title='Permanently delete $result'></form>";
+$delbut = "<button onclick=\"$magic_js\" value='edit' style='margin-left:10%;'>edit</button><form style='display:inline;float:right;' action='/todo/index.php' method='POST'><input type='hidden' name='del-todo' value='$result'> <input class='dele' style='background-color:red;margin-left:10px;margin-top:-1px;' type='submit' value='&#x2717;' title='Permanently delete $result'></form>";
 		echo "<span style='background-color:rgba(0,0,0,0.05);'>" . $beg . $result . $end . $result . "</a>" . $delbut;
 		echo "<pre style='white-space: pre-wrap;margin-top:0px;background-color:rgba(0,0,0,0.05);'><code>" . $content . "</code></pre></span>";
 }
